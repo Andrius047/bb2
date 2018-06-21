@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
         @include('includes.head')
-
     <header>
         @include('includes.header')
     </header>

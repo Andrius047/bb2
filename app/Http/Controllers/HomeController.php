@@ -51,8 +51,10 @@ class HomeController extends Controller
 //                    \Redirect::to('welcome');
                     var_dump('t2');
                 elseif($users[0]->level == 2)
-                    var_dump('t3');
-//                    \Redirect::to('welcome');
+                    return \View::make('welcomeuser')->with(['userId'=>$id]);
+                    //return view('service.userindex')->with(['userId'=>$id]);
+                    //var_dump('t3');
+                    //\Redirect::to('userservice')->with(['userId'=>$id]);
 
                 // validation successful!
                 // redirect them to the secure section or whatever

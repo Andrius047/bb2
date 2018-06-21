@@ -33,8 +33,28 @@ Route::get('reg', 'RegisterController@index')->name('user.index');
 Route::get('items', 'ItemController@create')->name('item.create');
 Route::post('items', 'ItemController@store')->name('item.store');
 Route::get('item', 'ItemController@index')->name('item.index');
-Route::get('itemedit', 'ItemController@edit')->name('item.edit');
+Route::get('itemedit/{id}', 'ItemController@edit')->name('item.edit');
 Route::post('itemedit', 'ItemController@saveedit')->name('item.saveedit');
+Route::post('itemsdelete', 'ItemController@delete')->name('item.delete');
+
+Route::get('servicetype', 'ServiceTypeController@create')->name('type.create');
+Route::post('servicetype', 'ServiceTypeController@store')->name('type.store');
+Route::get('type', 'ServiceTypeController@index')->name('type.index');
+Route::post('type', 'ServiceTypeController@delete')->name('type.delete');
+Route::post('typeundo', 'ServiceTypeController@undo')->name('type.undo');
+
+Route::get('services', 'ServiceController@create')->name('service.create');
+Route::post('services', 'ServiceController@store')->name('service.store');
+Route::get('service', 'ServiceController@index')->name('service.index');
+Route::post('service', 'ServiceController@delete')->name('service.delete');
+Route::get('serviceedit/{id}', 'ServiceController@edit')->name('service.edit');
+Route::post('serviceedit', 'ServiceController@saveedit')->name('service.saveedit');
+Route::get('serviceeditstate/{id}', 'ServiceController@editstate')->name('service.editstate');
+Route::post('serviceeditstate', 'ServiceController@savestate')->name('service.savestate');
+
+Route::get('userservice', 'UserServiceController@index')->name('userservice.userindex');
+Route::get('userserviceeditstate/{id}', 'UserServiceController@editstate')->name('userservice.usereditstate');
+Route::post('userserviceeditstate', 'UserServiceController@savestate')->name('userservice.usersavestate');
 
 Route::get('/', function () {
     return view('welcome');

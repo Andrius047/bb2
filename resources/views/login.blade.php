@@ -5,9 +5,9 @@
 
 <body>
 {{--<a href="{{ URL::to('logout') }}">Logout</a>--}}
-<div class="content_custom">
+
 {!! Form::open(array('url' => 'login')) !!}
-<div class="title">Login</div>
+<h1>Login</h1>
 
 <p>
     {!! $errors->first('email') !!}
@@ -24,8 +24,6 @@
     {!! Form::password('password') !!}
 </p>
 
-<p class="log_in_button">{!! Form::submit('Submit!') !!}</p>
+<p>{!! Form::submit('Submit!') !!}</p>
 {!! Form::close() !!}
-
-</div>
 

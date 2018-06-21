@@ -5,3 +5,9 @@ $(function() {
         'overlayShow': false
     });
 });
+$( document ).ready(function() {
+    console.log( "ready!" );
+});
+$( function() {
+    $( "#datepicker" ).datepicker();
+    } );

@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\category;
+use App\service_type;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class CategoryController extends Controller
+class ServiceTypeController extends Controller
 {
-
+    //
     public function index()
     {
-        $cat_list = \DB::table('categories')->select('id','category','deleted')->get();
+        $type_list = \DB::table('service_types')->select('id','type')->where("service_types.deleted", '=',  0)->get();
 
-        return view('category.index')->with('cat', $cat_list);
+        return view('type.index')->with('type', $type_list);
     }
 
     /**
@@ -27,7 +27,7 @@ class CategoryController extends Controller
     {
 //        $cat_list = \DB::table('categories')->select('id','category')->get();
 
-        return view('category.create');
+        return view('type.create');
     }
 
     /**
@@ -39,33 +39,33 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
 
-        $cat = new category;
+        $type = new service_type;
 
-        $cat->category = $request->input('category');
+        $type->type = $request->input('type');
 
 
-        $cat->deleted = 0;
+        $type->deleted = 0;
 
-        $cat->save();
+        $type->save();
 
-        return \Redirect::to('cat');
+        return \Redirect::to('type');
     }
 
     public function delete(Request $request)
     {
         $delete_id = $request->input('invisible');
 
-        \DB::table('categories')
-            ->where("categories.id", '=',  $delete_id)
+        \DB::table('service_types')
+            ->where("service_types.id", '=',  $delete_id)
             ->update(['deleted'=> 1]);
-        return \Redirect::to('cat');
+        return \Redirect::to('type');
     }
     public function undo(Request $request)
     {
         $delete_id = $request->input('invisible');
-        \DB::table('categories')
-            ->where("categories.id", '=',  $delete_id)
+        \DB::table('service_types')
+            ->where("service_types.id", '=',  $delete_id)
             ->update(['deleted'=> 0]);
-        return \Redirect::to('cat');
+        return \Redirect::to('type');
     }
 }
