@@ -43,7 +43,6 @@ class CategoryController extends Controller
 
         $cat->category = $request->input('category');
 
-
         $cat->deleted = 0;
 
         $cat->save();

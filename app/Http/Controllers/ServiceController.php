@@ -16,12 +16,14 @@ class ServiceController extends Controller
         $service_list = \DB::table('services')
             ->join('items', 'items.id', '=', 'services.connection_id')
             ->join('service_types', 'service_types.id', '=', 'services.service_type')
-            ->select('services.*', 'items.name as item_name', 'service_types.type')
+            ->join('users', 'users.id', '=', 'items.location_id')
+            ->select('services.*', 'items.name as item_name', 'service_types.type','users.name as user')
             ->where('services.deleted', '=', '0')
             ->get();
 
 
-//        var_dump($item_list);
+//        var_dump($service_list);
+//        die;
 //        die;
 
         return view('service.index')->with('service_list', $service_list);
@@ -43,6 +45,7 @@ class ServiceController extends Controller
         $service_type = \DB::table('service_types')->select('service_types.id', 'service_types.type')
             ->where('service_types.deleted', '=', '0')
             ->get();
+
         return view('service.create')->with(['items' => $items, 'service_type' => $service_type]);
     }
 

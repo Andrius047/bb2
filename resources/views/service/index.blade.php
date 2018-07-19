@@ -11,7 +11,7 @@
     </div>
 </div>
 <div class="content_custom">
-    <a href="/services" class="fancy">create service type</a>
+    <a href="/services" class="fancy">create service</a>
 </div>
 
 <div class="content_custom">
@@ -24,6 +24,7 @@
                 <th>description</th>
                 <th>date</th>
                 <th>item</th>
+                <th>person</th>
                 <th>service type</th>
                 <th>repeat</th>
                 <th>edit</th>
@@ -39,11 +40,12 @@
                     <td>{{ $service->description }}</td>
                     <td>{{ $service->date }}</td>
                     <td>{{ $service->item_name }}</td>
+                    <td>{{ $service->user }}</td>
                     <td><a href="/serviceeditstate/{{ $service->id }}" class="fancy">{{ $service->type }}</a></td>
                     <td>{{ $service->repeat }}</td>
                     {{--<td>{{ $stype->deleted }}</td>--}}
                     {{--@if ($stype->deleted  == 0)--}}
-                    <td><a href="/serviceedit/{{ $service->id }}" class="fancyz">edit</a>
+                    <td><a href="/serviceedit/{{ $service->id }}" class="fancy">edit</a>
                     <td>
                         {!! Form::open(['route' => 'service.delete']) !!}
                         {!! Form::hidden('invisible', $service->id) !!}

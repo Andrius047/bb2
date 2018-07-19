@@ -20,9 +20,6 @@ class ItemController extends Controller
             ->select('items.*','categories.category','item_models.model', 'users.username')
             ->where("items.deleted", '=',  0)->get();
 
-//        var_dump($item_list);
-//        die;
-
         return view('item.index')->with('item_list', $item_list);
     }
 
@@ -59,8 +56,6 @@ class ItemController extends Controller
         $item->description = $request->input('desc');
         $item->model_id = $request->input('parent');
         $item->location_id = $request->input('user');
-//        $something =  \DB::table('categories')->join('item_models', 'categories.id', '=', 'item_models.category_id')->where('item_models.id', $item->model_id)->select('categories.id')->get();
-//        $item->location_id =  $something[0]->id;
 
         $item->deleted = 0;
 
@@ -77,14 +72,11 @@ class ItemController extends Controller
         $item->description = $request->input('desc');
         $item->model_id = $request->input('parent');
         $item->location_id = $request->input('user');
-//        $something =  \DB::table('categories')->join('item_models', 'categories.id', '=', 'item_models.category_id')->where('item_models.id', $item->model_id)->select('categories.id')->get();
-//        $item->location_id =  $something[0]->id;
+
         $item->deleted = 0;
         \DB::table('items')
             ->where("items.id", '=',  $selected_id)
             ->update(['deleted'=> 0, 'name'=>$item->name, 'description'=>$item->description, 'location_id'=>$item->location_id, 'model_id'=>$item->model_id]);
-//
-//        $item->save();
 
         return \Redirect::to('item');
     }
@@ -103,21 +95,15 @@ class ItemController extends Controller
             ->select('id', 'name', 'description', 'location_id', 'model_id')
             ->where('id', '=', $id)->get();
         return view('item.edit')->with(['cat' => $categories, 'users' => $user_list, 'selectedItem'=> $selected_item[0]]);
-//        $edit_id = $request->input('invisible');
-//        var_dump("tai vat turime sita suda ".$id);die;
-//
-//        \DB::table('categories')
-//            ->where("categories.id", '=',  $delete_id)
-//            ->update(['deleted'=> 1]);
-//        return \Redirect::to('cat');
-    }
-    public function delete(Request $request)
-    {
-        $delete_id = $request->input('invisible');
 
-        \DB::table('items')
-            ->where("items.id", '=',  $delete_id)
-            ->update(['deleted'=> 1]);
+    }
+
+    public function delete(item $delete_id)
+    {
+//        $delete_id = $request->input('invisible');
+
+        $delete_id->delete();
+
         return \Redirect::to('item');
     }
 }
